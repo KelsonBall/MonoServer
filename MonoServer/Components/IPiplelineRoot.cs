@@ -3,7 +3,7 @@ using System;
 
 namespace MonoServer.Components
 {
-    public interface IPipelineRoot
+    public interface IPipelineRoot : IPipelineComponent
     {
         IContainer Injector { get; }
         IPipelineRoot AddDependencyConfigurationDelegate(Action<IContainer> configurer);

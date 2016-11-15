@@ -8,9 +8,9 @@ using System.Net;
 
 namespace MonoServer
 {
-    public class HttpServer : IPipelineComponent, IPipelineRoot
-    {
-        private IContainer _injector;
+    public class HttpServer : IPipelineRoot
+    {       
+        private readonly IContainer _injector;
         public IContainer Injector
         {
             get
@@ -25,6 +25,11 @@ namespace MonoServer
             {
                 return null;
             }
+        }
+
+        public HttpServer()
+        {
+            _injector = new Container();
         }
 
         private Action<IContainer> configurationDelegate;
