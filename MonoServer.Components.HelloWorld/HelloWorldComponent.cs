@@ -3,17 +3,9 @@
 namespace MonoServer.Components.HelloWorld
 {
     internal class HelloWorldComponent : IPipelineComponent
-    {
-
-        private readonly IPipelineComponent _parent;
-        public IPipelineComponent Parent
-        {
-            get
-            {
-                return _parent;
-            }
-        }
-
+    {	        
+		public IPipelineComponent Parent { get; }
+    
         public void Execute(Context context)
         {
             next?.Execute(context);
@@ -26,7 +18,7 @@ namespace MonoServer.Components.HelloWorld
 
         public HelloWorldComponent(IPipelineComponent parent)
         {
-            _parent = parent;
+            Parent = parent;
         }
     }
 }

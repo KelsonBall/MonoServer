@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoServer.Components.DelegateComponent\MonoServer.Components.DelegateComponent.csproj">
-      <Project>{f6245ce9-777d-4f7d-9add-0c9fba57bbe6}</Project>
+      <Project>{F6245CE9-777D-4F7D-9ADD-0C9FBA57BBE6}</Project>
       <Name>MonoServer.Components.DelegateComponent</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonoServer.Components.HelloWorld\MonoServer.Components.HelloWorld.csproj">
