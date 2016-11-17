@@ -133,9 +133,13 @@ end
 function template.parse(view)
     local j = 2
     local c = {[[
-context=... or {}
-local function include(v, c) return template.compile(v, map)(c or context) end
-local ___,blocks,layout={},blocks or {}
+context = ... or {}
+
+local function include(v, c)
+    return template.compile(v, map)(c or context)
+end
+
+local ___,blocks,layout = {}, blocks or {}
 ]] }
     local i, s = 1, find(view, "{", 1, true)
     while s do

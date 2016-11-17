@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Home.cs" />
+    <Compile Include="People.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,6 +54,7 @@
     <EmbeddedResource Include="Views\footer.lua" />
     <EmbeddedResource Include="Views\header.lua" />
     <EmbeddedResource Include="Views\index.lua" />
+    <EmbeddedResource Include="Views\names.lua" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoServer.Components.DelegateComponent\MonoServer.Components.DelegateComponent.csproj">

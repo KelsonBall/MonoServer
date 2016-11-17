@@ -31,7 +31,8 @@ namespace MonoServer.Components.Mvc.Views.Lua
 			state ["key"] = key;
 			state ["map"] = _sourceMap;
 			state ["model"] = model;
-			StringBuilder script = new StringBuilder ();
+            StringBuilder script = new StringBuilder ();
+		    script.AppendLine("function Each(collection) local e = collection:GetEnumerator() return function () if e:MoveNext() then return e.Current end end end");
 			script.AppendLine ("local template = loadstring(templateModule)()");
 			script.AppendLine ("local view = template.new(key, map)");
 			foreach (var modelKey in model.Keys)
