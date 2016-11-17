@@ -79,7 +79,7 @@ namespace MonoServer.MonoContext
             return true;
         }
 
-        public bool Write(FileInfo file)
+        public bool Write(FileInfo file, string contentType = "text/html")
         {
             if (ResponseWritten)
                 return false;
@@ -88,13 +88,24 @@ namespace MonoServer.MonoContext
                 StatusCode = 404;
                 return false;
             }
-            if (file.Extension == ".html")
-                WrappedResponseObject.ContentType = "text/html";
+            
+            WrappedResponseObject.ContentType = contentType;            
             ResponseWritten = true;
             using (FileStream stream = new FileStream(file.FullName, FileMode.Open))
             {
                 stream.CopyTo(WrappedResponseObject.OutputStream);
             }
+            return true;
+        }
+
+        public bool Write(Stream stream, string content = null)
+        {
+            if (ResponseWritten)
+                return false;
+            if (content != null)
+                WrappedResponseObject.ContentType = content;
+            ResponseWritten = true;
+            stream.CopyTo(WrappedResponseObject.OutputStream);
             return true;
         }
 

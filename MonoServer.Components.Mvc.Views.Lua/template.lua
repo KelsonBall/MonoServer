@@ -124,8 +124,8 @@ function template.new(view, map)
     return setmetatable({ }, { __tostring = function(self) return template.compile(view, map)(self) end })
 end
 
-function template.compile(view, map)
-    view = map[view]
+function template.compile(view, map)    
+    view = map[view]    
     local func = loadchunk(template.parse(view))
     return func, false
 end
@@ -134,7 +134,7 @@ function template.parse(view)
     local j = 2
     local c = {[[
 context=... or {}
-local function include(v, c) return template.compile(v)(c or context) end
+local function include(v, c) return template.compile(v, map)(c or context) end
 local ___,blocks,layout={},blocks or {}
 ]] }
     local i, s = 1, find(view, "{", 1, true)

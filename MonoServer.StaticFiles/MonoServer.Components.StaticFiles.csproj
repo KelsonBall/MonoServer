@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DictionaryWrapper.cs" />
+    <Compile Include="EmbededFileComponent.cs" />
+    <Compile Include="EmbededFileSelector.cs" />
     <Compile Include="IPipelineComponentExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticFileComponent.cs" />

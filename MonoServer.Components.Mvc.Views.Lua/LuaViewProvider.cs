@@ -4,7 +4,7 @@ using System.Text;
 using System.Reflection;
 using System.Collections.Generic;
 using MonoServer.MonoContext;
-using NLua;
+using LuaScript = NLua.Lua;
 
 namespace MonoServer.Components.Mvc.Views.Lua
 {
@@ -39,16 +39,25 @@ namespace MonoServer.Components.Mvc.Views.Lua
 
 		public string RenderView(string key, IDictionary<string,object> model)
 		{
-			Lua state = new Lua ();
+            LuaScript state = new LuaScript();
 			state.LoadCLRPackage ();
-			state.AddTable ("model");
+            state ["model"] = model;
 			state ["templateModule"] = template;
 			state ["key"] = key;
 			state ["map"] = _sourceMap;
 			StringBuilder script = new StringBuilder ();
-			script.AppendLine ("local template = load(templateModule)()");
+			script.AppendLine ("local template = loadstring(templateModule)()");
 			script.AppendLine ("local view = template.new(key, map)");
+            foreach (var modelKey in model.Keys)
+                script.AppendLine($"view.{modelKey} = model.{modelKey}");
+            script.AppendLine("return tostring(view)");
+            return (string)state.DoString(script.ToString())[0];
 		}
-	}
+
+        public IViewProvider UseRouter(Router router)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
