@@ -2,10 +2,10 @@
 
 namespace MonoServer.Components.Mvc
 {
-	public interface IControllerProvider
+	public interface IControllerProvider : IPipelineComponent
 	{
 		IController Get(string url);
-		IControllerProvider RegisterController (string urlPattern, Func<IController> controllerFactory);
+		IControllerProvider RegisterController (string url, Func<IController> controllerFactory);
 	}
 }
 

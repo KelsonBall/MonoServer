@@ -29,7 +29,7 @@ namespace MonoServer.Components.StaticFiles
         {
             if (context.Authenticated)
             {
-                string fileDir = context.Request.RequestUrl(_contentDirectory);
+                string fileDir = _contentDirectory + Path.DirectorySeparatorChar + context.Request.RequestUrl;
                 if (Directory.Exists(fileDir))
                 {
                     fileDir = Path.Combine(fileDir, "index.html");
@@ -40,8 +40,8 @@ namespace MonoServer.Components.StaticFiles
                     context.Response.Write(file);
                     return;
                 }
-            }            
-            next?.Execute(context);            
+            }
+            next?.Execute(context);
         }
     }
 }

@@ -87,9 +87,9 @@ local function escaped(view, s)
     return false, 0
 end
 
-do    
-    template.print = write    
-    
+do
+    template.print = write
+
     local context = { __index = function(t, k)
         return t.context[k] or t.template[k] or _G[k]
     end }
@@ -103,7 +103,7 @@ do
             setfenv(func, setmetatable({ template = template }, context))
             return func
         end
-    end    
+    end
 end
 
 function template.output(s)
@@ -120,22 +120,26 @@ function template.escape(s, c)
     return template.output(s)
 end
 
-function template.new(view, map)        
+function template.new(view, map)
     return setmetatable({ }, { __tostring = function(self) return template.compile(view, map)(self) end })
 end
 
-function template.compile(view, map)    
-    view = map[view]    
-    local func = loadchunk(template.parse(view))
+function template.compile(view, map)
+    view = map[view]
+    local func = loadchunk(template.parse(view, map))
     return func, false
 end
 
 function template.parse(view)
     local j = 2
     local c = {[[
-context=... or {}
-local function include(v, c) return template.compile(v, map)(c or context) end
-local ___,blocks,layout={},blocks or {}
+context = ... or {}
+
+local function include(v, c)
+    return template.compile(v, map)(c or context)
+end
+
+local ___,blocks,layout = {}, blocks or {}
 ]] }
     local i, s = 1, find(view, "{", 1, true)
     while s do

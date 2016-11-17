@@ -9,7 +9,7 @@ using System.Net;
 namespace MonoServer
 {
     public class HttpServer : IPipelineRoot
-    {       
+    {
         private readonly IContainer _injector;
         public IContainer Injector
         {
@@ -55,7 +55,7 @@ namespace MonoServer
         public void Start(string home, ushort port)
         {
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add($@"http://{home}:{port}/");            
+            listener.Prefixes.Add($@"http://{home}:{port}/");
             listener.Start();
             Running = true;
             Task.Factory.StartNew(() =>
@@ -69,7 +69,11 @@ namespace MonoServer
                         try
                         {
                             Context args = new Context(context);
-                            Execute(args);                            
+                            Execute(args);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
                         }
                         finally
                         {
@@ -84,6 +88,6 @@ namespace MonoServer
         public void Stop()
         {
             Running = false;
-        }        
+        }
     }
 }

@@ -92,9 +92,22 @@ namespace MonoServer.MonoContext
             }
         }
 
-        public string RequestUrl(string path = null)
+        private string _requestUrlOverride;
+        public string RequestUrl
         {
-            return path + Path.DirectorySeparatorChar + _requestUrl;
-        } 
+            get
+            {
+                if (_requestUrlOverride != null)
+                    return _requestUrlOverride;
+                string url = _requestUrl;
+                while (url.Contains("\\") || url.Contains("//"))
+                    url = url.Replace("\\", "").Replace("//", "/");
+                return url;
+            }
+            set
+            {
+                _requestUrlOverride = value;
+            }
+        }
     }
 }

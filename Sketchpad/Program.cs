@@ -14,7 +14,7 @@ namespace Sketchpad
 				{ "footer", "</body></html>" }
 			};
 
-			IViewProvider viewProvider = new LuaViewProvider (null, map);
+			IViewProvider viewProvider = new LuaViewProvider (map);
 
 			Dictionary<string, object> model = new Dictionary<string, object>(){
 				{ "message", "Hello, world!" }

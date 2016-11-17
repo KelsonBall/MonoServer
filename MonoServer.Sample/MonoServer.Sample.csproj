@@ -44,11 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Home.cs" />
+    <Compile Include="People.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Views\footer.lua" />
+    <EmbeddedResource Include="Views\header.lua" />
+    <EmbeddedResource Include="Views\index.lua" />
+    <EmbeddedResource Include="Views\names.lua" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoServer.Components.DelegateComponent\MonoServer.Components.DelegateComponent.csproj">
@@ -58,6 +64,14 @@
     <ProjectReference Include="..\MonoServer.Components.HelloWorld\MonoServer.Components.HelloWorld.csproj">
       <Project>{3C949B31-55F7-43B3-B586-FF5E63A39E08}</Project>
       <Name>MonoServer.Components.HelloWorld</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoServer.Components.Mvc.Views.Lua\MonoServer.Components.Mvc.Views.Lua.csproj">
+      <Project>{841d0144-69a2-4784-80aa-506381e39e18}</Project>
+      <Name>MonoServer.Components.Mvc.Views.Lua</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoServer.Components.Mvc\MonoServer.Components.Mvc.csproj">
+      <Project>{65634468-7212-4d2a-a187-a3a6a933a145}</Project>
+      <Name>MonoServer.Components.Mvc</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonoServer.StaticFiles\MonoServer.Components.StaticFiles.csproj">
       <Project>{BE6FBC53-2309-4F1C-984A-6E6D00E14FD2}</Project>
