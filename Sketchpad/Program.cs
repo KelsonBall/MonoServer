@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MonoServer.Components.Mvc;
 using MonoServer.Components.Mvc.Views.Lua;
 
 namespace Sketchpad
 {
-	class MainClass
+    class MainClass
 	{
 		public static void Main (string[] args)
 		{
