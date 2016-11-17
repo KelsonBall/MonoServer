@@ -9,7 +9,7 @@ namespace Sketchpad
 	{
 		public static void Main (string[] args)
 		{
-			Dictionary<string,string> map = {
+			Dictionary<string,string> map = new Dictionary<string,string>(){
 				{ "index", "{(header)} <h1>{{message}}</h1> {(footer)}" },
 				{ "header", "<html><head><title>Hello</title></head><body>" },
 				{ "footer", "</body></html>" }
@@ -17,11 +17,11 @@ namespace Sketchpad
 
 			IViewProvider viewProvider = new LuaViewProvider (null, map);
 
-			Dictionary<string, object> model = {
+			Dictionary<string, object> model = new Dictionary<string, object>(){
 				{ "message", "Hello, world!" }
 			};
 
-			viewProvider.RenderView ("index", model);
+			string result = viewProvider.RenderView ("index", model);
 		}
 	}
 }

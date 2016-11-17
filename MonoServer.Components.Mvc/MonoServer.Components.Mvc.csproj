@@ -45,6 +45,8 @@
     <Compile Include="IViewProvider.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="Router.cs" />
+    <Compile Include="MvcComponent.cs" />
+    <Compile Include="IControllerProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoServer\MonoServer.csproj">

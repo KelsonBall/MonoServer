@@ -4,10 +4,9 @@ namespace MonoServer.Components
 {    
     using MonoContext;
 
-    public interface IPipelineComponent
+	public interface IPipelineComponent : IExecutionModel
     {        
         IPipelineComponent Parent { get; }
-        IPipelineComponent Use(IPipelineComponent component);
-        void Execute(Context context);
+        IPipelineComponent Use(IPipelineComponent component);        
     }
 }
