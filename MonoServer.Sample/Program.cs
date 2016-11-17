@@ -1,20 +1,26 @@
 ﻿using System;
+using System.Reflection;
+
 using MonoServer.Components;
 using MonoServer.Components.Delegate;
+using MonoServer.Components.Mvc;
+using MonoServer.Components.Mvc.Views.Lua;
 using MonoServer.Components.StaticFiles;
 
 namespace MonoServer.Sample
 {
     class Program
-    {        
+    {
         static void Main(string[] args)
         {
-            new HttpServer().UseDelegate((context, next) => 
+            Assembly local = Assembly.GetExecutingAssembly();
+            new HttpServer().UseDelegate((context, next) =>
                                 {
                                     context.Authenticated = true;
                                     next?.Execute(context);
                                 })
                             .UseStaticFiles("./web")
+                            .UseMvc(new LuaViewProvider(new EmbededResourceMap("MonoServer.Sample.Views", local)), local)
                             .UseDelegate((context, next) =>
                                 {
                                     next?.Execute(context);

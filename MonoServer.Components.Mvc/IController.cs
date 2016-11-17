@@ -1,12 +1,12 @@
-﻿using System;
-using MonoServer.MonoContext;
+﻿using MonoServer.MonoContext;
 
 namespace MonoServer.Components.Mvc
 {
-	public delegate IExecutionModel HttpAction(Context context);
+	public delegate void HttpAction(Context context);
 
 	public interface IController
 	{
+	    void UseViewProvider(IViewProvider views);
 		HttpAction Get { get; set; }
 		HttpAction Post { get; set; }
 		HttpAction Put { get; set; }
@@ -15,14 +15,16 @@ namespace MonoServer.Components.Mvc
 
 	public static class IControllerExtensions
 	{
-		public static IExecutionModel Invoke(this IController contoller, Context context, HttpMethod method)
+		public static void Invoke(this IController controller, Context context)
 		{
-			switch (method)
+			switch (context.Request.Method)
 			{
 			case HttpMethod.Get:
-				return controller.Get?.Invoke(context);
+				controller.Get?.Invoke(context);
+			    break;
 			case HttpMethod.Post:
-				return controller.Post?.Invoke (context);
+				controller.Post?.Invoke (context);
+			    break;
 			}
 		}
 	}

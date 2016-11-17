@@ -94,7 +94,10 @@ namespace MonoServer.MonoContext
 
         public string RequestUrl(string path = null)
         {
-            return path + Path.DirectorySeparatorChar + _requestUrl;
-        } 
+            string url = path + Path.DirectorySeparatorChar + _requestUrl;
+            while (url.Contains("\\") || url.Contains("//"))
+                url = url.Replace("\\", "").Replace("//", "/");
+            return url;
+        }
     }
 }

@@ -21,20 +21,27 @@ namespace MonoServer.DependencyInjection
             return Get<T>(ResourceType.Either);
         }
 
+        public bool IsRegistered<T>()
+        {
+            var t = typeof(T);
+            return factories.ContainsKey(t) || singletons.ContainsKey(t);
+        }
+
         public T Get<T>(ResourceType type)
         {
+            var t = typeof(T);
             switch (type)
-            {                                    
+            {
                 case ResourceType.Singleton:
-                    return (T)singletons[typeof(T)];
+                    return (T)singletons[t];
                 case ResourceType.Factory:
-                    return (T)factories[typeof(T)]();
+                    return (T)factories[t]();
                 default:
-                    if (singletons.ContainsKey(typeof(T)))
-                        return (T)singletons[typeof(T)];
+                    if (singletons.ContainsKey(t))
+                        return (T)singletons[t];
                     else
-                        return (T)factories[typeof(T)]();
-            }            
+                        return (T)factories[t]();
+            }
         }
 
         public IContainer RegisterFactory<Ti, T>(Func<T> factory) where T : Ti
