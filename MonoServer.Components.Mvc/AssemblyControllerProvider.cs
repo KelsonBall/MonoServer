@@ -14,7 +14,7 @@ namespace MonoServer.Components.Mvc
 
         public void Execute(Context context)
         {
-            var controller = Get(context.Request.RequestUrl());
+            var controller = Get(context.Request.RequestUrl);
             if (controller == null)
             {
                 next.Execute(context);
