@@ -22,7 +22,7 @@ namespace MonoServer.Components.Mvc.Views
                             this[resource.Item1.Substring(root.Length + 1)] = reader.ReadToEnd();
         }
 
-        public EmbededResourceMap Use(string root, Assembly asm)
+        public EmbededResourceMap And(string root, Assembly asm)
         {
             List<string> resources = new List<string>();
             foreach (string resource in asm.GetManifestResourceNames())

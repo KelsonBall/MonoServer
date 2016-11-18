@@ -25,6 +25,12 @@ namespace MonoServer.Components.Mvc
 			case HttpMethod.Post:
 				controller.Post?.Invoke (context);
 			    break;
+            case HttpMethod.Put:
+                controller.Put?.Invoke(context);
+                break;
+            case HttpMethod.Delete:
+                controller.Delete?.Invoke(context);
+                break;
 			}
 		}
 	}

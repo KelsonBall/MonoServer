@@ -1,7 +1,8 @@
-﻿using MonoServer.DependencyInjection;
+﻿using MonoServer.Components;
+using MonoServer.DependencyInjection;
 using System;
 
-namespace MonoServer.Components
+namespace MonoServer
 {
     public static class IPipelineComponentExtensions
     {

@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
-using MonoServer.DependencyInjection;
 using MonoServer.MonoContext;
 
 namespace MonoServer.Components.Mvc
 {
-    public class AssemblyControllerProvider : IControllerProvider
+    public class AssemblyControllerProvider : IMvcPipelineComponent
     {
         public IPipelineComponent Parent { get; }
 
         public void Execute(Context context)
         {
-            var controller = Get(context.Request.RequestUrl);
+            var controller = Get(context.Request.RequestUrl == "" || context.Request.RequestUrl == "/" ? _defaultRedirect : context.Request.RequestUrl);
             if (controller == null)
             {
                 next.Execute(context);
@@ -28,41 +26,56 @@ namespace MonoServer.Components.Mvc
 
         private readonly IDictionary<string, Func<IController>> _registrey = new Dictionary<string, Func<IController>>();
 
-        private readonly IViewProvider _views;
+        private IViewProvider _views;
 
-        public AssemblyControllerProvider(IPipelineComponent parent, IViewProvider provider, params Assembly[] sourceAssemblies)
+        public AssemblyControllerProvider(IPipelineComponent parent, IViewProvider provider = null, string root = null, params Assembly[] sourceAssemblies)
         {
             Parent = parent;
-            _views = provider;
-            IContainer diContainer = this.GetInjector();
+            WithViews(provider);
+            if (sourceAssemblies.Length > 0)
+                WithControllers(root, sourceAssemblies);
+        }
+
+        public IMvcPipelineComponent WithControllers(string root, params Assembly[] sourceAssemblies)
+        {
             foreach (Assembly assembly in sourceAssemblies)
             {
-                foreach (Type controllerType in assembly.GetTypes().Where(t => typeof(IController).IsAssignableFrom(t)))
+                foreach (Type controllerType in assembly.GetTypes()
+                                                        .Where(t => t.FullName.StartsWith(root ?? ""))
+                                                        .Where(t => typeof(IController).IsAssignableFrom(t)))
                 {
                     UrlAttribute urlOverride = controllerType.GetCustomAttribute<UrlAttribute>();
-                    string url = urlOverride != null ? urlOverride.Url : controllerType.FullName.Replace('.', '/');
-                    _registrey[url] = () => (IController)Activator.CreateInstance(controllerType);
+                    string url = urlOverride != null ? urlOverride.Url : controllerType.FullName.Substring((root?.Length ?? -1) + 1).Replace('.', '/');
+                    _registrey[url] = () => {
+                        var controller = (IController)Activator.CreateInstance(controllerType);
+                        controller.UseViewProvider(_views);
+                        return controller;
+                    };
                 }
             }
+            return this;
+        }
+
+        public IMvcPipelineComponent WithViews(IViewProvider views)
+        {
+            _views = views;
+            return this;
+        }
+
+        private string _defaultRedirect = "";
+        public IMvcPipelineComponent SetDefault(string url)
+        {
+            _defaultRedirect = url;
+            return this;
         }
 
         public IController Get(string url)
         {
             if (url.StartsWith("/"))
                 url = url.Substring(1);
-            if (_registrey.ContainsKey(url))
-            {
-                IController controller = _registrey[url]();
-                controller.UseViewProvider(_views);
-                return controller;
-            }
+            if (_registrey.ContainsKey(url))                            
+                return _registrey[url]();            
             return null;
-        }
-
-        public IControllerProvider RegisterController(string url, Func<IController> controllerFactory)
-        {
-            _registrey[url] = controllerFactory;
-            return this;
         }
     }
 }

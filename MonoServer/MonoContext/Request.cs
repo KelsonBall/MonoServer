@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web;
 
@@ -34,7 +35,7 @@ namespace MonoServer.MonoContext
         public Request(HttpListenerRequest request)
         {
             Method = (HttpMethod)Enum.Parse(typeof(HttpMethod), request.HttpMethod, true);
-            Query = ParseNameValueCollection(request.QueryString);
+            Query = ParseNameValueCollection(request.QueryString, s => HttpUtility.UrlDecode(s));
             Headers = ParseNameValueCollection(request.Headers);
             Cookies = ParseCookies(request.Cookies);
             _requestUrl = request.GetRequestUrl();
@@ -42,27 +43,27 @@ namespace MonoServer.MonoContext
             if (request.HasEntityBody)
             {
                 ContentBytes = ParseInputStream(request.InputStream);
-                ContentText = HttpUtility.HtmlEncode(request.ContentEncoding.GetString(ContentBytes));
+                ContentText = request.ContentEncoding.GetString(ContentBytes);
                 ContentType = request.ContentType;
             }
         }
 
         private byte[] ParseInputStream(Stream inputStream)
-        {
-            byte[] data = new byte[inputStream.Length];
-            int read;
-            int offset = 0;
-            while ((read = inputStream.Read(data, offset, data.Length - offset)) > 0)
-                offset += read;
-            return data;
+        {            
+            IList<byte> bytes = new List<byte>();
+            int result;
+            while ((result = inputStream.ReadByte()) >= 0)                       
+                bytes.Add((byte)result);            
+            return bytes.ToArray();
         }
 
-        private IReadOnlyDictionary<string, string> ParseNameValueCollection(NameValueCollection collection)
+        private IReadOnlyDictionary<string, string> ParseNameValueCollection(NameValueCollection collection, Func<string, string> decoder = null)
         {
+            decoder = decoder ?? (s => s);
             var paramsDictionary = new Dictionary<string, string>();
             foreach (string key in collection.AllKeys)
             {
-                paramsDictionary.Add(key, collection[key]);
+                paramsDictionary.Add(key, decoder(collection[key]));
             }
             return new ReadOnlyDictionary<string, string>(paramsDictionary);
         }

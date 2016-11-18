@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MonoServer.Components.Mvc;
 
-namespace Api
+namespace Controllers.Api
 {
     public class People : IController
     {

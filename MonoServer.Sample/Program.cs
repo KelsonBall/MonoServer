@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 
-using MonoServer.Components;
 using MonoServer.Components.Delegate;
 using MonoServer.Components.Mvc;
+using MonoServer.Components.Mvc.Views;
 using MonoServer.Components.Mvc.Views.Lua;
 using MonoServer.Components.StaticFiles;
 
@@ -20,7 +20,7 @@ namespace MonoServer.Sample
                                     next?.Execute(context);
                                 })
                             .UseStaticFiles("./web")
-                            .UseMvc(new LuaViewProvider(new EmbededResourceMap("MonoServer.Sample.Views", local)), local)
+                            .UseMvc(new LuaViewProvider(new EmbededResourceMap("MonoServer.Sample.Views", local)), "Controllers", local)
                             .UseDelegate((context, next) =>
                                 {
                                     next?.Execute(context);

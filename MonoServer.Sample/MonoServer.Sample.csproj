@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Form.cs" />
     <Compile Include="Home.cs" />
     <Compile Include="People.cs" />
     <Compile Include="Program.cs" />
@@ -84,6 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="web\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\form.html" />
+    <Content Include="web\lib\com.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

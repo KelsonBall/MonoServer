@@ -40,11 +40,6 @@ namespace MonoServer.Components.Mvc.Views.Lua
 			script.AppendLine ("return tostring(view)");
 			return (string)state.DoString (script.ToString ()) [0];
 		}
-
-        public IViewProvider UseRouter(Router router)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 
