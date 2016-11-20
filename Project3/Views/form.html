@@ -1,0 +1,19 @@
+﻿{(header.html)}
+<form id="form-root" method="get" action="/" style="display:inline-block; text-align:center;">
+    <input type="text" name="stateid" style="visibility:collapse;" value="{{state.PromptId}}" >
+    <br />
+    <p style="width:180px;" id="textfield-p1" for="textfield1">{{state.Prompt1}}</p>
+    <br />
+    <textarea rows="5" cols="20" name="textfield1"></textarea>
+    <br />
+    <p style="width:180px;" id="textfield-p2" for="textfield2">{{state.Prompt2}}</p>
+    <br />
+    <textarea rows="5" cols="20" name="textfield2" ></textarea>
+    <br />
+    <p style="width:180px;" id="textfield-p3" for="textfield3">{{state.Prompt3}}</p>
+    <br />
+    <textarea rows="5" cols="20" name="textfield3" ></textarea>
+    <br /><br />
+    <input type="submit" id="submit-button" value="Next">
+</form>
+{(footer.html)}

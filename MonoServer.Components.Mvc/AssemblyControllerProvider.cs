@@ -36,9 +36,11 @@ namespace MonoServer.Components.Mvc
                 WithControllers(root, sourceAssemblies);
         }
 
-        public IMvcPipelineComponent WithControllers(string root, params Assembly[] sourceAssemblies)
+        public IMvcPipelineComponent WithControllers(string root, params Assembly[] assemblies)
         {
-            foreach (Assembly assembly in sourceAssemblies)
+            if (assemblies.Length == 0)
+                assemblies = new[] { Assembly.GetEntryAssembly() };
+            foreach (Assembly assembly in assemblies)
             {
                 foreach (Type controllerType in assembly.GetTypes()
                                                         .Where(t => t.FullName.StartsWith(root ?? ""))

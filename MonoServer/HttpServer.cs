@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using MonoServer.DependencyInjection;
+using Microsoft.Practices.Unity;
 using MonoServer.MonoContext;
 using System.Net;
 
@@ -10,12 +10,12 @@ namespace MonoServer
 {
     public class HttpServer : IPipelineRoot
     {
-        private readonly IContainer _injector;
-        public IContainer Injector
+        private readonly IUnityContainer _container;
+        public IUnityContainer Container
         {
             get
             {
-                return _injector;
+                return _container;
             }
         }
 
@@ -29,11 +29,11 @@ namespace MonoServer
 
         public HttpServer()
         {
-            _injector = new Container();
+            _container = new UnityContainer();
         }
 
-        private Action<IContainer> configurationDelegate;
-        public IPipelineRoot AddDependencyConfigurationDelegate(Action<IContainer> configurer)
+        private Action<IUnityContainer> configurationDelegate;
+        public IPipelineRoot ConfigureContainer(Action<IUnityContainer> configurer)
         {
             configurationDelegate += configurer;
             return this;
@@ -54,6 +54,7 @@ namespace MonoServer
         private bool Running = false;
         public void Start(string home, ushort port)
         {
+            configurationDelegate?.Invoke(_container);
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add($@"http://{home}:{port}/");
             listener.Start();
@@ -83,6 +84,8 @@ namespace MonoServer
                     });
                 }
             });
+            string message;
+            while (!(message = Console.ReadLine()).Equals("exit")) ;
         }
 
         public void Stop()

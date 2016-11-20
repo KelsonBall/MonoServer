@@ -9,6 +9,8 @@ namespace MonoServer.Components.Mvc.Views
     {
         public EmbededResourceMap(string root = "", params Assembly[] assemblies)
         {
+            if (assemblies.Length == 0)
+                assemblies = new[] { Assembly.GetEntryAssembly() };
             List<Tuple<string, Assembly>> resources = new List<Tuple<string, Assembly>>();
             foreach (Assembly asm in assemblies)
                 foreach (string resource in asm.GetManifestResourceNames())

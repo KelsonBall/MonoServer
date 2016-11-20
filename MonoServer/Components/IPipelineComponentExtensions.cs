@@ -15,7 +15,7 @@ namespace MonoServer
 
         public static IContainer GetInjector(this IPipelineComponent component)
         {
-            return component.GetRoot().Injector;
+            return component.GetRoot().Container;
         }
 
         public static IPipelineRoot GetRoot(this IPipelineComponent component)
