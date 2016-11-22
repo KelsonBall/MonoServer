@@ -11,12 +11,7 @@ namespace MonoServer
             var root = component.GetRoot();
             root.Start(home, port);
             return root;
-        }
-
-        public static IContainer GetInjector(this IPipelineComponent component)
-        {
-            return component.GetRoot().Container;
-        }
+        }			
 
         public static IPipelineRoot GetRoot(this IPipelineComponent component)
         {
