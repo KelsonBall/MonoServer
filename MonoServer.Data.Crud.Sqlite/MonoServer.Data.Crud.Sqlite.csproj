@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A55CEC2E-0DE9-4CA4-9D41-A17CCED103AD}</ProjectGuid>
+    <ProjectGuid>{84C4D01C-DE9E-4C05-B76F-C355BD0E8CBB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>MonoServer.Data.Crud</RootNamespace>
-    <AssemblyName>MonoServer.Data.Crud</AssemblyName>
+    <RootNamespace>MonoServer.Data.Crud.Sqlite</RootNamespace>
+    <AssemblyName>MonoServer.Data.Crud.Sqlite</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -29,28 +29,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Mono.Data.Sqlite" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ICrudRepository.cs" />
-    <Compile Include="IDbItem.cs" />
-    <Compile Include="ITypeMap.cs" />
-    <Compile Include="ITableGenerator.cs" />
-    <Compile Include="AutoTypeRepository.cs" />
-    <Compile Include="ConnectionFuncExtensions.cs" />
-    <Compile Include="IDao.cs" />
-    <Compile Include="CrudRepositoryExtensions.cs" />
-    <Compile Include="IDbRelation.cs" />
-    <Compile Include="DbRelation.cs" />
-    <Compile Include="IDbRelationExtensions.cs" />
+    <Compile Include="SqliteTypeMap.cs" />
+    <Compile Include="SqliteTableGenerator.cs" />
+    <Compile Include="SqliteDao.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\MonoServer.Data.Crud\MonoServer.Data.Crud.csproj">
+      <Project>{A55CEC2E-0DE9-4CA4-9D41-A17CCED103AD}</Project>
+      <Name>MonoServer.Data.Crud</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using MonoServer.Components;
-using MonoServer.DependencyInjection;
 using System;
 
 namespace MonoServer

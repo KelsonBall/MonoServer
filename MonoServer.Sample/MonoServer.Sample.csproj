@@ -67,11 +67,11 @@
       <Name>MonoServer.Components.HelloWorld</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonoServer.Components.Mvc.Views.Lua\MonoServer.Components.Mvc.Views.Lua.csproj">
-      <Project>{841d0144-69a2-4784-80aa-506381e39e18}</Project>
+      <Project>{841D0144-69A2-4784-80AA-506381E39E18}</Project>
       <Name>MonoServer.Components.Mvc.Views.Lua</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonoServer.Components.Mvc\MonoServer.Components.Mvc.csproj">
-      <Project>{65634468-7212-4d2a-a187-a3a6a933a145}</Project>
+      <Project>{65634468-7212-4D2A-A187-A3A6A933A145}</Project>
       <Name>MonoServer.Components.Mvc</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonoServer.StaticFiles\MonoServer.Components.StaticFiles.csproj">
