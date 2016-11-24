@@ -7,8 +7,8 @@
     <ProjectGuid>{BE6FBC53-2309-4F1C-984A-6E6D00E14FD2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonoServer.Components.StaticFiles</RootNamespace>
-    <AssemblyName>MonoServer.Components.StaticFiles</AssemblyName>
+    <RootNamespace>MonoServer.Components.Files</RootNamespace>
+    <AssemblyName>MonoServer.Components.Files</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -46,7 +46,7 @@
     <Compile Include="EmbededFileSelector.cs" />
     <Compile Include="IPipelineComponentExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticFileComponent.cs" />
+    <Compile Include="LocalFileComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoServer\MonoServer.csproj">

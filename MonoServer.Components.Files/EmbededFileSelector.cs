@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace MonoServer.Components.StaticFiles
+namespace MonoServer.Components.Files
 {
     public class EmbededFileSelector : Dictionary<string, Func<Stream>>
     {

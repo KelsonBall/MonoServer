@@ -1,9 +1,9 @@
 ﻿using MonoServer.MonoContext;
 using System.IO;
 
-namespace MonoServer.Components.StaticFiles
+namespace MonoServer.Components.Files
 {
-    public class StaticFileComponent : IPipelineComponent
+    public class LocalFileComponent : IPipelineComponent
     {
         private readonly IPipelineComponent _parent;
         public IPipelineComponent Parent
@@ -19,7 +19,7 @@ namespace MonoServer.Components.StaticFiles
 
         private readonly string _contentDirectory;
 
-        public StaticFileComponent(IPipelineComponent parent, string contentDirectory)
+        public LocalFileComponent(IPipelineComponent parent, string contentDirectory)
         {
             _parent = parent;
             _contentDirectory = new DirectoryInfo(contentDirectory).FullName;

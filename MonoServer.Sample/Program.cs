@@ -3,7 +3,7 @@
 using MonoServer.Components.Delegate;
 using MonoServer.Components.Mvc;
 using MonoServer.Components.Mvc.Views.Lua;
-using MonoServer.Components.StaticFiles;
+using MonoServer.Components.Files;
 
 namespace MonoServer.Sample
 {
@@ -11,13 +11,12 @@ namespace MonoServer.Sample
     {
         static void Main(string[] args)
         {
-            Assembly local = Assembly.GetExecutingAssembly();
             new HttpServer().UseDelegate((context, next) =>
                                 {
                                     context.Authenticated = true;
                                     next?.Execute(context);
                                 })
-                            .UseStaticFiles("./web") //new LuaViewProvider(new EmbededResourceMap("MonoServer.Sample.Views", local)), "Controllers", local
+                            .UseLocalFiles("./web") 
                             .UseMvc()
                                 .WithEmbededLuaViews("MonoServer.Sample.Views")
                                 .WithControllers("Controllers")

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace MonoServer.Components.StaticFiles
+namespace MonoServer.Components.Files
 {
     public abstract class DictionaryWrapper<TKey, TValue> : IDictionary<TKey, TValue>
     {

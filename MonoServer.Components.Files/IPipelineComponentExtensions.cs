@@ -1,13 +1,13 @@
 ﻿
 using System.Reflection;
 
-namespace MonoServer.Components.StaticFiles
+namespace MonoServer.Components.Files
 {
     public static class IPipelineComponentExtensions
     {
-        public static IPipelineComponent UseStaticFiles(this IPipelineComponent component, string path)
+        public static IPipelineComponent UseLocalFiles(this IPipelineComponent component, string path)
         {
-            var fileComponent = new StaticFileComponent(component, path);
+            var fileComponent = new LocalFileComponent(component, path);
             component.Use(fileComponent);
             return fileComponent;
         }

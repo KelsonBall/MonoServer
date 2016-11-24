@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoServer.Sample", "MonoSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoServer.Components.HelloWorld", "MonoServer.Components.HelloWorld\MonoServer.Components.HelloWorld.csproj", "{3C949B31-55F7-43B3-B586-FF5E63A39E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoServer.Components.StaticFiles", "MonoServer.StaticFiles\MonoServer.Components.StaticFiles.csproj", "{BE6FBC53-2309-4F1C-984A-6E6D00E14FD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoServer.Components.Files", "MonoServer.Components.Files\MonoServer.Components.Files.csproj", "{BE6FBC53-2309-4F1C-984A-6E6D00E14FD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoServer.Components.Authentication", "MonoServer.Components.Authentication\MonoServer.Components.Authentication.csproj", "{BB65C3C4-96CF-4670-AE20-017F1AE47032}"
 EndProject
