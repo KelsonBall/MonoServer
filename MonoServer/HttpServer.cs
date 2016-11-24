@@ -84,8 +84,8 @@ namespace MonoServer
                     });
                 }
             });
-            string message;
-            while (!(message = Console.ReadLine()).Equals("exit")) ;
+            string message = "";
+            while (!(message = Console.ReadLine())?.Equals("exit") ?? true) ;
         }
 
         public void Stop()

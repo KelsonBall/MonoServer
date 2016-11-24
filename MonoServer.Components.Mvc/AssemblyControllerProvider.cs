@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MonoServer.MonoContext;
+using Microsoft.Practices.Unity;
 
 namespace MonoServer.Components.Mvc
 {
@@ -40,6 +41,7 @@ namespace MonoServer.Components.Mvc
         {
             if (assemblies.Length == 0)
                 assemblies = new[] { Assembly.GetEntryAssembly() };
+			IUnityContainer factory = this.GetRoot ().Container;
             foreach (Assembly assembly in assemblies)
             {
                 foreach (Type controllerType in assembly.GetTypes()
@@ -49,7 +51,7 @@ namespace MonoServer.Components.Mvc
                     UrlAttribute urlOverride = controllerType.GetCustomAttribute<UrlAttribute>();
                     string url = urlOverride != null ? urlOverride.Url : controllerType.FullName.Substring((root?.Length ?? -1) + 1).Replace('.', '/');
                     _registrey[url] = () => {
-                        var controller = (IController)Activator.CreateInstance(controllerType);
+						var controller = (IController)factory.Resolve(controllerType);
                         controller.UseViewProvider(_views);
                         return controller;
                     };
