@@ -10,10 +10,10 @@ running the executable and stopped by closing the process.
 ## In The Works:
 
  * Docker Container and Digital Ocean images for running MonoServer applications using an Nginx reverse proxy.
- * Front end libraries deployed via nuget.
+ * Front end libraries deployed via nuget - project goal is to avoid dependency on npm / node.
  * `Response.Write` decorator pattern implementation.
  * Getting started wiki
- * `Context` interface segregation and `System.Web` independent implementation to fascilitate testing
+ * `Context` interface segregation and `System.Web` independent implementation to facilitate testing
 
 ## Sample:
 
