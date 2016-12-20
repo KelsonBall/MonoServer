@@ -3,6 +3,7 @@ using System.Linq;
 using System.Data;
 using System.Collections.Generic;
 using Dapper;
+using System.Reflection;
 
 namespace MonoServer.Data.Crud.Sqlite
 {
@@ -34,9 +35,13 @@ namespace MonoServer.Data.Crud.Sqlite
 			return this;
 		}
 
-		public IDao WithModelsFrom (params System.Reflection.Assembly[] assemblies)
+		public IDao WithModelsFrom (params Assembly[] assemblies)
 		{
 			var tableGen = new SqliteTableGenerator ();
+
+            if (assemblies.Length == 0)
+                assemblies = new[] { Assembly.GetEntryAssembly() };
+
 			foreach (var asm in assemblies)
 			{
 				foreach (var type in asm.GetTypes().Where(t => typeof(IDbItem).IsAssignableFrom(t)))

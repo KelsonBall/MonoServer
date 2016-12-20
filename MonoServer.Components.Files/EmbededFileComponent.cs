@@ -17,6 +17,8 @@ namespace MonoServer.Components.Files
         public EmbededFileComponent(IPipelineComponent parent, string root, params Assembly[] assemblies)
         {
             Parent = parent;
+            if (assemblies.Length == 0)
+                assemblies = new[] { Assembly.GetEntryAssembly() };
             List<Tuple<string, Assembly>> resources = new List<Tuple<string, Assembly>>();
             foreach (Assembly asm in assemblies)
                 foreach (string resource in asm.GetManifestResourceNames())
@@ -29,7 +31,7 @@ namespace MonoServer.Components.Files
 
         public void Execute(Context context)
         {
-            if (context.Authenticated)
+            if (context.Authenticated && _content != null)
             {
                 string url = context.Request.RequestUrl;
                 if (_content.ContainsKey(url))
