@@ -2,7 +2,7 @@
 
 MonoServer is a backend framework for developing server code in C#. 
 It is architecturally inspired by asp.net for dotnet core. What makes MonoServer unique
-and useful is its deployment methodology, which is summed up as 'Put your files on your server and run the program.'
+and useful is its deployment methodology, which is summed up as `Put your compiled application on your server and run the program.`
 
 MonoServer applications are executable programs. They are self hosted and are started by 
 running the executable and stopped by closing the process. 
