@@ -41,7 +41,7 @@ namespace MonoServer.Components.Mvc
         {
             if (assemblies.Length == 0)
                 assemblies = new[] { Assembly.GetEntryAssembly() };
-			IUnityContainer factory = this.GetRoot ().Container;
+	    IUnityContainer factory = this.GetRoot ().Container;
             foreach (Assembly assembly in assemblies)
             {
                 foreach (Type controllerType in assembly.GetTypes()
